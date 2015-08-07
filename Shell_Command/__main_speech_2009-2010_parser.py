@@ -36,16 +36,15 @@ if __name__ == '__main__':
 
 	# Create Parsed Speeches - President
 	for URL in range(0, Xpotus):
-	#for URL in range(645, 694):
 		speechURL = '\n'.join(map(str, read_presidentURLs(URL)))
 		time.sleep(0.5)
 		try:
-			pre_WHT1(speechURL)
-			print "ran pre_WHT1"
+			pre_WHT3(speechURL)
+			print "ran pre_WHT3"
 		except:
 			try:
-				pre_WHT3(speechURL)
-				print "ran pre_WHT3"
+				pre_WHT1(speechURL)
+				print "ran pre_WHT1"
 			except:
 				try:
 					pre_WHT2(speechURL)
@@ -70,7 +69,6 @@ if __name__ == '__main__':
 
 		# Create Parsed Speeches - Vice-President
 		for URL in range(0, Xvp):
-		#for URL in range(180, 182):
 			speechURL = '\n'.join(map(str, read_vice_presidentURLs(URL)))
 			time.sleep(0.5)
 			try:
@@ -107,7 +105,6 @@ if __name__ == '__main__':
 
 		# Create Parsed Speeches - First Lady
 		for URL in range(0, Xflotus):
-		#for URL in range(550, 552):
 			speechURL = '\n'.join(map(str, read_first_ladyURLs(URL)))
 			time.sleep(0.5)
 			try:
@@ -144,7 +141,6 @@ if __name__ == '__main__':
 
 		# Create Parsed Speeches - Second Lady
 		for URL in range(0, Xsl):
-		#for URL in range(20, 22):
 			speechURL = '\n'.join(map(str, read_second_ladyURLs(URL)))
 			time.sleep(0.5)
 			try:
@@ -181,7 +177,6 @@ if __name__ == '__main__':
 
 		# Create Parsed Speeches - Other
 		for URL in range(0, Xother):
-		#for URL in range(290, 292):
 			speechURL = '\n'.join(map(str, read_otherURLs(URL)))
 			time.sleep(0.5)
 			try:

@@ -68,7 +68,6 @@ def pre_WHT3(url):
 
     #Final DateID
     date_id = year_id+'-'+month_id+'-'+day_id
-    print date_id
 
     try:
         # Get Paragraph2
@@ -142,7 +141,6 @@ def pre_WHT3(url):
         path4 = date_id+"_"+"ID4"+".txt"
         path5 = date_id+"_"+"ID5"+".txt"
         if os.path.isfile(path1) == False:
-            #print "no file ID1 found, create ID1"
             f = open(date_id+"_"+"ID1"+".txt", 'w')
             f.write(url2.encode('utf-8'))
             f.write(paragraph_body1.encode('utf-8'))
@@ -151,7 +149,6 @@ def pre_WHT3(url):
             return
 
         elif os.path.isfile(path1) == True:
-            #print "found file ID1, check for ID2"
             if os.path.isfile(path2) == False:
                 print "found ID1, no file ID2 found, make ID2"
                 f = open(date_id+"_"+"ID2"+".txt", 'w')
@@ -161,7 +158,6 @@ def pre_WHT3(url):
                 f.close
                 return
             elif os.path.isfile(path2) == True:
-                #print "found file ID2, check for ID3"
                 if os.path.isfile(path3) == False:
                     print "found IDs 1-2, no file ID3 found, make ID3"
                     f = open(date_id+"_"+"ID3"+".txt", 'w')
@@ -171,7 +167,6 @@ def pre_WHT3(url):
                     f.close
                     return
                 elif os.path.isfile(path3) == True:
-                    #print "found file ID3, check for ID4"
                     if os.path.isfile(path4) == False:
                         print "found IDs 1-3, no file ID4 found, make ID4"
                         f = open(date_id+"_"+"ID4"+".txt", 'w')
@@ -181,7 +176,6 @@ def pre_WHT3(url):
                         f.close
                         return
                     elif os.path.isfile(path4) == True:
-                        #print "found file ID4, check for ID5"
                         if os.path.isfile(path5) == False:
                             print "found IDs 1-4, no file ID5 found, make ID5"
                             f = open(date_id+"_"+"ID5"+".txt", 'w')
@@ -219,6 +213,9 @@ def pre_WHT3(url):
 
 #Except
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-senate-passage-health-insurance-reform"
+
+#url = "http://www.whitehouse.gov/the-press-office/remarks-president-and-vice-president-meeting-with-nations-mayors"
+#url = "http://www.whitehouse.gov/the-press-office/remarks-president-costa-mesa-town-hall"
 
 #pre_WHT3(url)
 
