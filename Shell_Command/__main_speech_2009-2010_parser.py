@@ -72,12 +72,12 @@ if __name__ == '__main__':
 			speechURL = '\n'.join(map(str, read_vice_presidentURLs(URL)))
 			time.sleep(0.5)
 			try:
-				pre_WHT1(speechURL)
-				print "ran pre_WHT1"
+				pre_WHT3(speechURL)
+				print "ran pre_WHT3"
 			except:
 				try:
-					pre_WHT3(speechURL)
-					print "ran pre_WHT3"
+					pre_WHT1(speechURL)
+					print "ran pre_WHT1"
 				except:
 					try:
 						pre_WHT2(speechURL)
@@ -108,12 +108,12 @@ if __name__ == '__main__':
 			speechURL = '\n'.join(map(str, read_first_ladyURLs(URL)))
 			time.sleep(0.5)
 			try:
-				pre_WHT1(speechURL)
-				print "ran pre_WHT1"
+				pre_WHT3(speechURL)
+				print "ran pre_WHT3"
 			except:
 				try:
-					pre_WHT3(speechURL)
-					print "ran pre_WHT3"
+					pre_WHT1(speechURL)
+					print "ran pre_WHT1"
 				except:
 					try:
 						pre_WHT2(speechURL)
@@ -144,12 +144,12 @@ if __name__ == '__main__':
 			speechURL = '\n'.join(map(str, read_second_ladyURLs(URL)))
 			time.sleep(0.5)
 			try:
-				pre_WHT1(speechURL)
-				print "ran pre_WHT1"
+				pre_WHT3(speechURL)
+				print "ran pre_WHT3"
 			except:
 				try:
-					pre_WHT3(speechURL)
-					print "ran pre_WHT3"
+					pre_WHT1(speechURL)
+					print "ran pre_WHT1"
 				except:
 					try:
 						pre_WHT2(speechURL)
@@ -180,12 +180,12 @@ if __name__ == '__main__':
 			speechURL = '\n'.join(map(str, read_otherURLs(URL)))
 			time.sleep(0.5)
 			try:
-				pre_WHT1(speechURL)
-				print "ran pre_WHT1"
+				pre_WHT3(speechURL)
+				print "ran pre_WHT3"
 			except:
 				try:
-					pre_WHT3(speechURL)
-					print "ran pre_WHT3"
+					pre_WHT1(speechURL)
+					print "ran pre_WHT1"
 				except:
 					try:
 						pre_WHT2(speechURL)
