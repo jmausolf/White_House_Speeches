@@ -32,7 +32,13 @@ def WHT(url):
     # Get Paragraph Body
     content = soup.find("div", {"class":"field-items"})
     paragraph = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
-    paragraph_body = "\n\n%s" % ("\n\n".join(paragraph))
+    if len(paragraph) < 1:
+        content = soup.find("div", {"class":"field-item even"})
+        paragraph = ["".join(x.findAll(text=True)) for x in content.findAll("div")]
+        paragraph_body = "\n\n%s" % ("\n\n".join(paragraph))
+    elif len(paragraph) >= 1:
+        paragraph = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
+        paragraph_body = "\n\n%s" % ("\n\n".join(paragraph))
 
     # Perform Quality Check on Parsed Speech
     speech_parser_QC(url, paragraph_body, release)
@@ -55,7 +61,6 @@ def WHT(url):
         path4 = date_id+"_"+"ID4"+".txt"
         path5 = date_id+"_"+"ID5"+".txt"
         if os.path.isfile(path1) == False:
-            #print "no file ID1 found, create ID1"
             f = open(date_id+"_"+"ID1"+".txt", 'w')
             f.write(url2.encode('utf-8'))
             f.write(release.encode('utf-8'))
@@ -65,7 +70,6 @@ def WHT(url):
             return
 
         elif os.path.isfile(path1) == True:
-            #print "found file ID1, check for ID2"
             if os.path.isfile(path2) == False:
                 print "found ID1, no file ID2 found, make ID2"
                 f = open(date_id+"_"+"ID2"+".txt", 'w')
@@ -76,7 +80,6 @@ def WHT(url):
                 f.close
                 return
             elif os.path.isfile(path2) == True:
-                #print "found file ID2, check for ID3"
                 if os.path.isfile(path3) == False:
                     print "found IDs 1-2, no file ID3 found, make ID3"
                     f = open(date_id+"_"+"ID3"+".txt", 'w')
@@ -87,7 +90,6 @@ def WHT(url):
                     f.close
                     return
                 elif os.path.isfile(path3) == True:
-                    #print "found file ID3, check for ID4"
                     if os.path.isfile(path4) == False:
                         print "found IDs 1-3, no file ID4 found, make ID4"
                         f = open(date_id+"_"+"ID4"+".txt", 'w')
@@ -98,7 +100,6 @@ def WHT(url):
                         f.close
                         return
                     elif os.path.isfile(path4) == True:
-                        #print "found file ID4, check for ID5"
                         if os.path.isfile(path5) == False:
                             print "found IDs 1-4, no file ID5 found, make ID5"
                             f = open(date_id+"_"+"ID5"+".txt", 'w')
@@ -132,6 +133,7 @@ def WHT(url):
 
 #Broke the exception parser #the links do not exist, not a problem with parser. 
 #url = "http://www.whitehouse.gov/the-press-office/2014/01/31/remarks-president-long-term"
+#url = "http://www.whitehouse.gov/the-press-office/2015/06/06/remarks-president-eulogy-honor-beau-biden"
 #WHT(url)
 
 

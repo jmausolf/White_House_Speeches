@@ -1,4 +1,4 @@
-    ##################################
+##################################
 ###                            ###
 ###      Joshua G. Mausolf     ###
 ###    Computation Institute   ###
@@ -52,5 +52,5 @@ def speech_parser_skip_QC(url):
         pass
 
 
-url = "http://www.whitehouse.gov/the-press-office/2012/10/28/remarks-president-hurricane-sandy"
+#url = "http://www.whitehouse.gov/the-press-office/2012/10/28/remarks-president-hurricane-sandy"
 #speech_parser_skip_QC(url)

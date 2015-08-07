@@ -8,6 +8,7 @@
 
 from Quality_Check_speech_parser import *
 from month import *
+from dateutil.parser import parse
 
 def pre_WHT3(url):
     """Prints Text Output for a given URL from Whitehouse Speeches and Remarks"""
@@ -16,16 +17,63 @@ def pre_WHT3(url):
     import os
     from bs4 import BeautifulSoup
 
-
     soup = BeautifulSoup(urllib2.urlopen(url).read())
 
     # Get URL
     url2 = "Cite: \n"+url+"\n"
-    
+
+    # Get Date
+    Date = soup.find("meta", {"property":"article:published_time"})
+    raw_date = str(Date).split('"', 2)[1][0:10]
+    date = '\n'+raw_date+'\n'
+    date_reform = parse(str(date)).strftime('%B %d, %Y')
+    date_reformat = '\n'+date_reform+'\n'
+
+
+    # Get Release
+    Release = soup.find("meta", {"property":"og:title"})
+    raw_release = str(Release)
+    release = '\n'+'The White House''\n''Office of the Press Secretary'+'\n'+'\n'+'For Immediate Release'+date_reformat
+
+    # Get Title
+    Title = soup.find("meta", {"property":"og:title"})
+    raw_title = str(Title).split('"', 2)[1]
+    title = '\n'+raw_title+'\n'
+
+    #Get File ID - Date & Time
+    #Date - RAW
+    date_split = date.split('-')
+    month_raw = date_split[1]
+    day_raw = date_split[2]
+    year_raw = date_split[0]
+
+    #MonthID
+    month_clean1 = month_raw.replace(' ', '')
+    month_clean2 = month_clean1.replace('\n', '')
+    try:
+        month_id = month(month_clean2)
+    except:
+        month_id = month_clean2
+
+    #DayID
+    day_clean1 = day_raw.replace(',', '')
+    day_clean2 = day_clean1.replace(' ', '')
+    day_clean3 = day_clean2.replace('\n', '')
+    day_id = day_clean3
+
+    #YearID
+    year_clean1 = year_raw.replace(' ', '')
+    year_clean2 = year_clean1.replace('\n', '')
+    year_id = year_clean2
+
+    #Final DateID
+    date_id = year_id+'-'+month_id+'-'+day_id
+    print date_id
+
     try:
         # Get Paragraph2
-        content2 = soup.find("div", {"class":"legacy-content"})
-        paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div")]
+        content2 = soup.find("div", {"class":"field-items"})
+        paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div", {"class":"legacy-para"})]
 
         #Pargraph Body2
         paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
@@ -37,144 +85,23 @@ def pre_WHT3(url):
 
         if test_id == '':
             print "paragraph body 2 empty"
-            content1 = soup.find("div", {"id":"content"})
+            content1 = soup.find("div", {"class":"field-items"})
             paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
             paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
-            try:
-                date_block_raw = paragraph_body2[0:200]
-                date_block_clean1 = date_block_raw.replace('_', '')
-                date_block_clean2 = date_block_clean1.replace('\n', ' ')
-                date_block_clean3 = date_block_clean2.replace(u'\xa0', '')
-                date_block_clean4 = date_block_clean3.replace(' ', '', 16)
-                
-                #Date - RAW
-                date_split = date_block_clean4.split(' ')
-                month_raw = date_split[3]
-                day_raw = date_split[4]
-                year_raw = date_split[5]
-
-                #MonthID
-                month_clean1 = month_raw.replace(' ', '')
-                month_clean2 = month_clean1.replace('\n', '')
-                try:
-                    month_id = month(month_clean2)
-                except:
-                    month_id = month_clean2
-
-                #DayID
-                day_clean1 = day_raw.replace(',', '')
-                day_clean2 = day_clean1.replace(' ', '')
-                day_clean3 = day_clean2.replace('\n', '')
-                day_id = day_clean3
-
-                #YearID
-                year_clean1 = year_raw.replace(' ', '')
-                year_clean2 = year_clean1.replace('\n', '')
-                year_id = year_clean2
-
-                #Final DateID
-                date_id = year_id+'-'+month_id+'-'+day_id
-
-            except:
-                #DateID
-                date_id = "2009-2010"+'-'+url[60:75]
-                pass
 
         elif len(test_id) < 400:
             print "paragraph body 2 not correct"
-            content1 = soup.find("div", {"id":"content"})
+            content1 = soup.find("div", {"class":"field-items"})
             paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
             paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
-            try:
-                date_block_raw = paragraph_body2[0:200]
-                date_block_clean1 = date_block_raw.replace('_', '')
-                date_block_clean2 = date_block_clean1.replace('\n', ' ')
-                date_block_clean3 = date_block_clean2.replace(u'\xa0', '')
-                date_block_clean4 = date_block_clean3.replace(' ', '', 16)
-                
-                #Date - RAW
-                date_split = date_block_clean4.split(' ')
-                month_raw = date_split[3]
-                day_raw = date_split[4]
-                year_raw = date_split[5]
-
-                #MonthID
-                month_clean1 = month_raw.replace(' ', '')
-                month_clean2 = month_clean1.replace('\n', '')
-                try:
-                    month_id = month(month_clean2)
-                except:
-                    month_id = month_clean2
-
-                #DayID
-                day_clean1 = day_raw.replace(',', '')
-                day_clean2 = day_clean1.replace(' ', '')
-                day_clean3 = day_clean2.replace('\n', '')
-                day_id = day_clean3
-
-                #YearID
-                year_clean1 = year_raw.replace(' ', '')
-                year_clean2 = year_clean1.replace('\n', '')
-                year_id = year_clean2
-
-                #Final DateID
-                date_id = year_id+'-'+month_id+'-'+day_id
-
-            except:
-                #DateID
-                date_id = "2009-2010"+'-'+url[60:75]
-                pass
-
 
         else:
             print "else"
             paragraph_body1 = ' '
 
-            try:
-                date_block_raw = paragraph_body2[0:200]
-                date_block_clean1 = date_block_raw.replace('_', '')
-                date_block_clean2 = date_block_clean1.replace('\n', ' ')
-                date_block_clean3 = date_block_clean2.replace(u'\xa0', '')
-                date_block_clean4 = date_block_clean3.replace(' ', '', 16)
-
-                
-                #Date - RAW
-                date_split = date_block_clean4.split(' ')
-                month_raw = date_split[3]
-                day_raw = date_split[4]
-                year_raw = date_split[5]
-
-                #MonthID
-                month_clean1 = month_raw.replace(' ', '')
-                month_clean2 = month_clean1.replace('\n', '')
-                try:
-                    month_id = month(month_clean2)
-                except:
-                    month_id = month_clean2
-
-                #DayID
-                day_clean1 = day_raw.replace(',', '')
-                day_clean2 = day_clean1.replace(' ', '')
-                day_clean3 = day_clean2.replace('\n', '')
-                day_id = day_clean3
-
-                #YearID
-                year_clean1 = year_raw.replace(' ', '')
-                year_clean2 = year_clean1.replace('\n', '')
-                year_id = year_clean2
-
-                #Final DateID
-                date_id = year_id+'-'+month_id+'-'+day_id
-
-            except:
-                #DateID
-                date_id = "2009-2010"+'-'+url[60:75]
-                pass
-
-
     except:
         # Get Paragraph1
-        content1 = soup.find("div", {"id":"content"})
+        content1 = soup.find("div", {"class":"field-items"})
         paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
 
         # Get Paragraph Body1
@@ -187,21 +114,20 @@ def pre_WHT3(url):
 
 
         if test_id == '':
-            content2 = soup.find("div", {"class":"legacy-content"})
-            paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div")]   
+            content2 = soup.find("div", {"class":"field-items"})
+            paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div", {"class":"legacy-para"})]   
             paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
         elif len(test_id) < 400:
-            content2 = soup.find("div", {"class":"legacy-content"})
-            paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div")]
+            content2 = soup.find("div", {"class":"field-items"})
+            paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div", {"class":"legacy-para"})]
             paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
         else:
             paragraph_body2 = ' '
 
 
-        #DateID
-        date_id = "2009-2010"+'-'+url[60:75]
 
-
+    # Perform Quality Check on Parsed Speech
+    speech_parser_two_para_QC(url, paragraph_body1, paragraph_body2)
 
     #Random ID
     randID1 = str(random.randrange(6, 10000, 1))

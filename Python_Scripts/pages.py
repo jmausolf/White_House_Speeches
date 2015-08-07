@@ -73,7 +73,7 @@ def sub_pages_URLs_current(parent_url):
     finally:
         f.close()
 
-sub_pages_URLs_current("https://www.whitehouse.gov/briefing-room/Speeches-and-Remarks")
+#sub_pages_URLs_current("https://www.whitehouse.gov/briefing-room/Speeches-and-Remarks")
 
 
 

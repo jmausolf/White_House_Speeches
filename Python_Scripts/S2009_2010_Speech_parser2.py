@@ -7,6 +7,7 @@
 ##################################
 
 from Quality_Check_speech_parser import *
+from dateutil.parser import parse
 
 def pre_WHT2(url):
     """Prints Text Output for a given URL from Whitehouse Speeches and Remarks"""
@@ -19,16 +20,63 @@ def pre_WHT2(url):
 
     # Get URL
     url2 = "Cite: \n"+url+"\n"
-    
+
+    # Get Date
+    Date = soup.find("meta", {"property":"article:published_time"})
+    raw_date = str(Date).split('"', 2)[1][0:10]
+    date = '\n'+raw_date+'\n'
+    date_reform = parse(str(date)).strftime('%B %d, %Y')
+    date_reformat = '\n'+date_reform+'\n'
+
+
+    # Get Release
+    Release = soup.find("meta", {"property":"og:title"})
+    raw_release = str(Release)
+    release = '\n'+'The White House''\n''Office of the Press Secretary'+'\n'+'\n'+'For Immediate Release'+date_reformat
+
+    # Get Title
+    Title = soup.find("meta", {"property":"og:title"})
+    raw_title = str(Title).split('"', 2)[1]
+    title = '\n'+raw_title+'\n'
+
+    #Get File ID - Date & Time
+    #Date - RAW
+    date_split = date.split('-')
+    month_raw = date_split[1]
+    day_raw = date_split[2]
+    year_raw = date_split[0]
+
+    #MonthID
+    month_clean1 = month_raw.replace(' ', '')
+    month_clean2 = month_clean1.replace('\n', '')
+    try:
+        month_id = month(month_clean2)
+    except:
+        month_id = month_clean2
+
+    #DayID
+    day_clean1 = day_raw.replace(',', '')
+    day_clean2 = day_clean1.replace(' ', '')
+    day_clean3 = day_clean2.replace('\n', '')
+    day_id = day_clean3
+
+    #YearID
+    year_clean1 = year_raw.replace(' ', '')
+    year_clean2 = year_clean1.replace('\n', '')
+    year_id = year_clean2
+
+    #Final DateID
+    date_id = year_id+'-'+month_id+'-'+day_id
+    print date_id
+
     # Get Paragraph Body
-    content = soup.find("div", {"id":"content"})
+    content = soup.find("div", {"class":"field-items"})
     paragraph = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
     paragraph_body = "\n\n%s" % ("\n\n".join(paragraph))
 
-
     #Get File ID - Date & Time
     #Date
-    date_id = "2009-2010"+'-'+url[60:75]
+    #date_id = "2009-2010"+'-'+url[60:75]
 
     #Random ID
     randID1 = str(random.randrange(6, 10000, 1))

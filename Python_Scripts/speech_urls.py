@@ -31,13 +31,16 @@ def speech_urls(sub_pages_url):
         f.close()
 
 
-def speech_urls_current(sub_pages_url):
-
+def speech_urls_current_data(current_pages_data):
+    """This function opens and reads a saved html file.
+    It generates a list of speech urls from this saved html file."""
+    
     import urllib2,sys
     from bs4 import BeautifulSoup
 
+    html_data = open(current_pages_data,'r').read()
     #Base Page
-    soup = BeautifulSoup(urllib2.urlopen(sub_pages_url).read())
+    soup = BeautifulSoup(html_data)
     
     #Speech URLs
     content = soup.find("div", {"class":"view-content"})
@@ -46,16 +49,12 @@ def speech_urls_current(sub_pages_url):
     base_url = "http://www.whitehouse.gov"
 
     try:
-        f=open('speech_urls_current.csv', 'a')
+        f=open('speech_urls_current_data.csv', 'a')
         for link in content.findAll('a', href=True):
             ext = link['href']
             speech_url = base_url+ext
             f.write(u'%s\n' % (speech_url))
     finally:
         f.close()
-
-#Ok, so this worked, but is a lame work around. 
-#speech_urls_current("https://www.whitehouse.gov/briefing-room/Speeches-and-Remarks")
-speech_urls_current("file:///Users/Josh/Google%20Drive/SOCIOLOGY/COMPUTING/White_House_Speech_Crawler/Python_Scripts/test_current.html")
 
 
