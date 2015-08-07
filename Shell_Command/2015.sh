@@ -31,10 +31,19 @@ cd ..
 ## ____________ SECOND_STAGE - Collect URLs ___________________ ##
 
 #Run main_speechesurls.py to generate CSV's
-python __main_speech_urls_bearer.py "2015/01" "2015/09"
+python __main_speech_urls_bearer.py "2015/01" "2015/06"
+python __current_speeches.py
+rm whitehouse_current.html
 
+## ____________ THIRD_STAGE - Filter and Merge URLs ____________ ##
 
-## ____________ THIRD_STAGE - Filter URLs _____________________ ##
+#Merge Speech URLs
+python __main_speech_urls_merge.py
+mv speechurls.csv pre_merge_speechurls.csv
+
+#Remove Speech URL Duplicates (If Any)
+python __main_speech_urls_remove_duplicates.py
+
 
 #Filter Speech URLs
 python __main_speech_urls_filter.py 
@@ -47,7 +56,8 @@ python __main_speech_urls_filter.py
 mv requested_parentURLs.csv bash_CSVs/Auxiliary_CSVs
 mv subpages.csv bash_CSVs/Auxiliary_CSVs
 mv parentURLs.csv bash_CSVs/Auxiliary_CSVs
-
+mv pre_merge_speechurls.csv bash_CSVs/Auxiliary_CSVs
+mv speech_urls_current_data.csv bash_CSVs/Auxiliary_CSVs
 
 #Copy All Speech CSVs to Speech Folders
 

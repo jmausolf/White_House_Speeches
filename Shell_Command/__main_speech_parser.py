@@ -42,19 +42,15 @@ if __name__ == '__main__':
 		time.sleep(0.5)
 		try:
 			WHT(speechURL)
-			print "ran WHT1"
 		except:
 			try:
 				WHT2(speechURL)
-				print "ran WHT2"
 			except:
 				try:
 					pre_WHT3(speechURL)
-					print "ran pre_WHT3"
 				except:
 					try:
 						WHT3(speechURL)
-						print "ran WHT3"
 					except:
 						print "ERROR: NO SPEECH PARSED. EXCEPTION CODE: 99"
 						speech_parser_skip_QC(speechURL)
@@ -80,19 +76,15 @@ if __name__ == '__main__':
 			time.sleep(0.5)
 			try:
 				WHT(speechURL)
-				print "ran WHT1"
 			except:
 				try:
 					WHT2(speechURL)
-					print "ran WHT2"
 				except:
 					try:
 						pre_WHT3(speechURL)
-						print "ran pre_WHT3"
 					except:
 						try:
 							WHT3(speechURL)
-							print "ran WHT3"
 						except:
 							print "ERROR: NO SPEECH PARSED. EXCEPTION CODE: 99"
 							speech_parser_skip_QC(speechURL)
@@ -116,24 +108,19 @@ if __name__ == '__main__':
 
 		# Create Parsed Speeches - First Lady
 		for URL in range(0, Xflotus):
-		#for URL in range(550, 552):
 			speechURL = '\n'.join(map(str, read_first_ladyURLs(URL)))
 			time.sleep(0.5)
 			try:
 				WHT(speechURL)
-				print "ran WHT1"
 			except:
 				try:
 					WHT2(speechURL)
-					print "ran WHT2"
 				except:
 					try:
 						pre_WHT3(speechURL)
-						print "ran pre_WHT3"
 					except:
 						try:
 							WHT3(speechURL)
-							print "ran WHT3"
 						except:
 							print "ERROR: NO SPEECH PARSED. EXCEPTION CODE: 99"
 							speech_parser_skip_QC(speechURL)
@@ -157,24 +144,19 @@ if __name__ == '__main__':
 
 		# Create Parsed Speeches - Second Lady
 		for URL in range(0, Xsl):
-		#for URL in range(20, 22):
 			speechURL = '\n'.join(map(str, read_second_ladyURLs(URL)))
 			time.sleep(0.5)
 			try:
 				WHT(speechURL)
-				print "ran WHT1"
 			except:
 				try:
 					WHT2(speechURL)
-					print "ran WHT2"
 				except:
 					try:
 						pre_WHT3(speechURL)
-						print "ran pre_WHT3"
 					except:
 						try:
 							WHT3(speechURL)
-							print "ran WHT3"
 						except:
 							print "ERROR: NO SPEECH PARSED. EXCEPTION CODE: 99"
 							speech_parser_skip_QC(speechURL)
@@ -198,16 +180,13 @@ if __name__ == '__main__':
 
 		# Create Parsed Speeches - Other
 		for URL in range(0, Xother):
-		#for URL in range(290, 292):
 			speechURL = '\n'.join(map(str, read_otherURLs(URL)))
 			time.sleep(0.5)
 			try:
 				WHT(speechURL)
-				print "ran WHT1"
 			except:
 				try:
 					WHT2(speechURL)
-					print "ran WHT2"
 				except:
 					try:
 						pre_WHT3(speechURL)
