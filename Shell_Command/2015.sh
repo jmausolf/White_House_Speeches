@@ -61,6 +61,7 @@ mv speech_urls_current_data.csv bash_CSVs/Auxiliary_CSVs
 
 #Copy All Speech CSVs to Speech Folders
 
+cp whitehouse_current.html bash_Speech
 cp speechurls.csv bash_Speech
 cp __president_urls.csv bash_Speech/Speech_President
 cp __vice_president_urls.csv bash_Speech/Speech_Vice_President
@@ -70,6 +71,7 @@ cp __other_urls.csv bash_Speech/Speech_Other
 
 
 #Move All CSVs
+mv whitehouse_current.html bash_CSVs/Auxiliary_CSVs
 mv speechurls.csv bash_CSVs/Master_Speech_CSV
 mv __president_urls.csv bash_CSVs/Filtered_Speech_CSVs
 mv __vice_president_urls.csv bash_CSVs/Filtered_Speech_CSVs
