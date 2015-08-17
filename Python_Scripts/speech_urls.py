@@ -16,8 +16,12 @@ def speech_urls(sub_pages_url):
     soup = BeautifulSoup(urllib2.urlopen(sub_pages_url).read())
 	
     #Speech URLs
-    content = soup.find("div", {"class":"view-content"})
-    speeches = ["".join(x.findAll("a")) for x in content.findAll(href=True)]
+    try:
+        content = soup.find("div", {"class":"view-content"})
+        speeches = ["".join(x.findAll("a")) for x in content.findAll(href=True)]
+    except:
+        print "no speech urls found for this subpage..."
+        pass
     
     base_url = "http://www.whitehouse.gov"
 
