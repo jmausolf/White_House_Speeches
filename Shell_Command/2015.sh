@@ -33,7 +33,7 @@ cd ..
 #Run main_speechesurls.py to generate CSV's
 python __main_speech_urls_bearer.py "2015/01" "2015/06"
 python __current_speeches.py
-rm whitehouse_current.html
+#rm whitehouse_current.html
 
 ## ____________ THIRD_STAGE - Filter and Merge URLs ____________ ##
 
