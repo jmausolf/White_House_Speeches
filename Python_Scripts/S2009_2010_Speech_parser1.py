@@ -171,6 +171,7 @@ def pre_WHT1(url):
 
 #Try
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-qa-session-closing-fiscal-responsibility-summit-2-23-09"
+
 #url = "http://www.whitehouse.gov/the-press-office/press-availability-president-obama-and-prime-minister-rudd-australia"
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-barack-obama-executive-compensation-with-secretary-geithner"
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-welcoming-senior-staff-and-cabinet-secretaries-white-house"

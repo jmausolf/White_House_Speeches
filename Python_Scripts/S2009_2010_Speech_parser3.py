@@ -19,6 +19,7 @@ def pre_WHT3(url):
 
     soup = BeautifulSoup(urllib2.urlopen(url).read())
 
+
     # Get URL
     url2 = "Cite: \n"+url+"\n"
 
@@ -69,59 +70,73 @@ def pre_WHT3(url):
     #Final DateID
     date_id = year_id+'-'+month_id+'-'+day_id
 
+    #Define Content
+    content = soup.find("div", {"class":"field-items"})
+
+    #Get Paragraph1p
+    paragraph1p = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
+    paragraph_body1p = "\n\n%s" % ("\n\n".join(paragraph1p))
+
+    #Get Paragraph1div
+    paragraph1div = ["".join(x.findAll(text=True)) for x in content.findAll("div")]
+    paragraph_body1div = "\n\n%s" % ("\n\n".join(paragraph1div))
+
+    # Get Paragraph2
+    paragraph2 = ["".join(x.findAll(text=True)) for x in content.findAll("div", {"class":"legacy-para"})]
+    paragraph_body2lp = "\n\n%s" % ("\n\n".join(paragraph2))
+
+
+    # Test ID - Div - Legacy Para
+    test_2 = paragraph_body2lp.replace(' ', '').replace('\n', '')
+
+    # Test ID - 1p
+    test_1p = paragraph_body1p.replace(' ', '').replace('\n', '')
+
+    # Test ID - 1div
+    test_1div = paragraph_body1div.replace(' ', '').replace('\n', '')
+
     try:
-        # Get Paragraph2
-        content2 = soup.find("div", {"class":"field-items"})
-        paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div", {"class":"legacy-para"})]
 
-        #Pargraph Body2
-        paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
+        if test_2 !='':
+            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
+            paragraph_body1 = ' '
 
-        # Test ID
-        test_raw = paragraph_body2
-        test1 = test_raw.replace(' ', '')
-        test_id = test1.replace('\n', '')
+        elif test_2 == '':
+            if test_1p == '':
+                if test_1div != '':
+                    paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
+                    paragraph_body2 = ' '
+            elif test_1p != '':
+                paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1p))
+                paragraph_body2 = ' '
 
-        if test_id == '':
-            print "paragraph body 2 empty"
-            content1 = soup.find("div", {"class":"field-items"})
-            paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
-            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
-
-        elif len(test_id) < 400:
+        elif len(test_2) < 400:
             print "paragraph body 2 not correct"
-            content1 = soup.find("div", {"class":"field-items"})
-            paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
-            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
+            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
 
         else:
             print "else"
             paragraph_body1 = ' '
+            paragraph_body2 = ' '
 
     except:
-        # Get Paragraph1
-        content1 = soup.find("div", {"class":"field-items"})
-        paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
+        paragraph_body2 = ' '
 
-        # Get Paragraph Body1
-        paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
-
-        # Test ID
-        test_raw = paragraph_body1
-        test1 = test_raw.replace(' ', '')
-        test_id = test1.replace('\n', '')
-
-
-        if test_id == '':
-            content2 = soup.find("div", {"class":"field-items"})
-            paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div", {"class":"legacy-para"})]   
-            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
-        elif len(test_id) < 400:
-            content2 = soup.find("div", {"class":"field-items"})
-            paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div", {"class":"legacy-para"})]
-            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
+        # Get Paragraph_Body1
+        if test_1p == '':
+            if test_1div != '':
+                paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
+            else:
+                print "paragraph_body1p and paragraph_body1div empty"
+                paragraph_body1 = ' '
+        elif test_1p != '':
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1p))
         else:
-            paragraph_body2 = ' '
+            paragraph_body1 = ' '
+            print "paragraph_body1 empty"
+
+
 
 
 
@@ -204,6 +219,8 @@ def pre_WHT3(url):
 
 #Try
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-qa-session-closing-fiscal-responsibility-summit-2-23-09"
+
+#url = "http://www.whitehouse.gov/the-press-office/remarks-president-qa-session-closing-fiscal-responsibility-summit-2-23-09"
 #url = "http://www.whitehouse.gov/the-press-office/press-availability-president-obama-and-prime-minister-rudd-australia"
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-barack-obama-executive-compensation-with-secretary-geithner"
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-welcoming-senior-staff-and-cabinet-secretaries-white-house"
@@ -216,6 +233,8 @@ def pre_WHT3(url):
 
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-and-vice-president-meeting-with-nations-mayors"
 #url = "http://www.whitehouse.gov/the-press-office/remarks-president-costa-mesa-town-hall"
+
+#url = "https://www.whitehouse.gov/the-press-office/2010/09/28/remarks-president-dnc-rally-madison-wisconsin"
 
 #pre_WHT3(url)
 
