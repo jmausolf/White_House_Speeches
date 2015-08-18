@@ -62,3 +62,44 @@ def speech_urls_current_data(current_pages_data):
         f.close()
 
 
+def speech_urls_current_data_wa(current_pages_data):
+    """This function opens and reads a saved html file.
+    It generates a list of speech urls from this saved html file."""
+    
+    import urllib2,sys
+    from bs4 import BeautifulSoup
+
+    html_data = open(current_pages_data,'r').read()
+    #Base Page
+    soup = BeautifulSoup(html_data)
+    
+    #Speech URLs
+    content = soup.find("div", {"class":"panel-pane pane-views-panes pane-press-office-listings-panel-pane-5"})
+
+    base_url = "http://www.whitehouse.gov"
+
+    try:
+        f=open('speech_urls_current_data.csv', 'a')
+        for link in content.findAll('a', href=True):
+            ext = link['href']
+            speech_url = base_url+ext
+            
+            if "#" in speech_url:
+                discard = speech_url
+            elif "mp3" in speech_url:
+                discard = speech_url
+            elif "mp4" in speech_url:
+                discard = speech_url
+            elif "https:" in speech_url:
+                discard = speech_url
+            elif "?page=" in speech_url:
+                discard = speech_url
+            elif "weekly-address-" not in speech_url:
+                discard = speech_url              
+            else:
+                write_speech_url = speech_url
+            
+            f.write(u'%s\n' % (write_speech_url))
+    finally:
+        f.close()
+

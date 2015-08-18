@@ -46,7 +46,12 @@ python __main_speech_urls_remove_duplicates.py
 
 
 #Filter Speech URLs
-python __main_speech_urls_filter.py 
+python __main_speech_urls_filter.py
+
+#Organize HTML Files
+mkdir Current_WHT_HTML
+mv *.html Current_WHT_HTML/
+
 
 
 ## ____________ FOURTH_STAGE - Sort Filtered URLs _____________ ##
@@ -59,9 +64,9 @@ mv parentURLs.csv bash_CSVs/Auxiliary_CSVs
 mv pre_merge_speechurls.csv bash_CSVs/Auxiliary_CSVs
 mv speech_urls_current_data.csv bash_CSVs/Auxiliary_CSVs
 
-#Copy All Speech CSVs to Speech Folders
 
-cp whitehouse_current.html bash_Speech
+#Copy All Speech CSVs to Speech Folders
+cp Current_WHT_HTML/ bash_Speech
 cp speechurls.csv bash_Speech
 cp __president_urls.csv bash_Speech/Speech_President
 cp __vice_president_urls.csv bash_Speech/Speech_Vice_President
@@ -71,7 +76,7 @@ cp __other_urls.csv bash_Speech/Speech_Other
 
 
 #Move All CSVs
-mv whitehouse_current.html bash_CSVs/Auxiliary_CSVs
+mv Current_WHT_HTML/ bash_CSVs/Auxiliary_CSVs
 mv speechurls.csv bash_CSVs/Master_Speech_CSV
 mv __president_urls.csv bash_CSVs/Filtered_Speech_CSVs
 mv __vice_president_urls.csv bash_CSVs/Filtered_Speech_CSVs
