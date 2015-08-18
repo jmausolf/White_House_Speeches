@@ -85,6 +85,11 @@ def pre_WHT3(url):
     paragraph2 = ["".join(x.findAll(text=True)) for x in content.findAll("div", {"class":"legacy-para"})]
     paragraph_body2lp = "\n\n%s" % ("\n\n".join(paragraph2))
 
+    
+    #ADD P2-P
+    # Get Paragraph2p
+    paragraph2p = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
+
 
     # Test ID - Div - Legacy Para
     test_2 = paragraph_body2lp.replace(' ', '').replace('\n', '')
@@ -96,32 +101,54 @@ def pre_WHT3(url):
     test_1div = paragraph_body1div.replace(' ', '').replace('\n', '')
 
     try:
+"""
+        if test_id == '':
+            print "paragraph body 2 empty"
+            content1 = soup.find("div", {"class":"field-items"})
+            paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
+
+        elif len(test_id) < 400:
+            print "paragraph body 2 not correct"
+            content1 = soup.find("div", {"class":"field-items"})
+            paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
+
+"""
+
 
         if test_2 !='':
             paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
             paragraph_body1 = ' '
 
+
         elif test_2 == '':
+            
+            print "paragraph body 2 empty"
+            paragraph2p = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
+            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
+
             if test_1p == '':
                 if test_1div != '':
                     paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
-                    paragraph_body2 = ' '
+                    paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
             elif test_1p != '':
                 paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1p))
-                paragraph_body2 = ' '
+                paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
 
         elif len(test_2) < 400:
             print "paragraph body 2 not correct"
-            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
+            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
             paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
 
         else:
             print "else"
-            paragraph_body1 = ' '
-            paragraph_body2 = ' '
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
+            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
 
     except:
-        paragraph_body2 = ' '
+        print "except"
+        paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
 
         # Get Paragraph_Body1
         if test_1p == '':
@@ -129,11 +156,11 @@ def pre_WHT3(url):
                 paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
             else:
                 print "paragraph_body1p and paragraph_body1div empty"
-                paragraph_body1 = ' '
+                paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
         elif test_1p != '':
             paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1p))
         else:
-            paragraph_body1 = ' '
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
             print "paragraph_body1 empty"
 
 
