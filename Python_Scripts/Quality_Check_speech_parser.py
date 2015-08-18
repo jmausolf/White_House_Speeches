@@ -16,7 +16,9 @@ def speech_parser_QC(url, paragraph_body, release=None):
             print "WARNING SHORT PARGRAPH PARSED. NEEDS INVESTIGATION"
             print "Writing suspect speech url to csv..."
             f.close()
-    elif release==None:
+            pass
+
+    if release==None:
         pass
 
     elif release != None:
@@ -30,7 +32,7 @@ def speech_parser_QC(url, paragraph_body, release=None):
                 f.close()   
 
 
-def speech_parser_two_para_QC(url, paragraph_body1, paragraph_body2):
+def speech_parser_two_para_QC(url, paragraph_body1, paragraph_body2, release=None):
 
     if len(paragraph_body1) < 200 and len(paragraph_body2) < 200:
         try:
@@ -40,6 +42,20 @@ def speech_parser_two_para_QC(url, paragraph_body1, paragraph_body2):
             print "WARNING SHORT PARGRAPH PARSED. NEEDS INVESTIGATION"
             print "Writing suspect speech url to csv..."
             f.close()
+            pass
+            
+    if release==None:
+        pass
+
+    elif release != None:
+        if len(release) < 25:
+            try:
+                f=open('QC_Check_Release_speechurls.csv', 'a')
+                f.write(u'%s\n' % (url))
+            finally:
+                print "WARNING SHORT RELEASE PARSED. NEEDS INVESTIGATION"
+                print "Writing suspect speech url to csv..."
+                f.close() 
 
 
 def speech_parser_skip_QC(url):

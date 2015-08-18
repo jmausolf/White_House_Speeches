@@ -31,6 +31,7 @@ def WHT(url):
     
     #Define Content
     content = soup.find("div", {"class":"field-items"})
+    content2 = soup.find("div", {"class":"field-item even"})
 
     #Get Paragraph1p
     paragraph1p = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
@@ -46,39 +47,52 @@ def WHT(url):
     # Test ID - 1div
     test_1div = paragraph_body1div.replace(' ', '').replace('\n', '')
 
-
     # Get Paragraph Body
-    content = soup.find("div", {"class":"field-items"})
     paragraph = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
+    paragraph2p = ["".join(x.findAll(text=True)) for x in content2.findAll("p")]
+    paragraph2div = ["".join(x.findAll(text=True)) for x in content2.findAll("div")]
+
     if len(paragraph) < 1:
         if test_1p == '':
-            print "test_1p empty"
             if test_1div != '':
-                print "test_1div empty"
-                paragraph_body = "\n\n%s" % ("\n\n".join(paragraph1div))
+                print "test_1div not empty"
+                paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
+                paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph1p))
             else:
                 print "paragraph_body1p and paragraph_body1div empty"
-                content = soup.find("div", {"class":"field-item even"})
-                paragraph = ["".join(x.findAll(text=True)) for x in content.findAll("div")]
-                paragraph_body = "\n\n%s" % ("\n\n".join(paragraph))
+                content2 = soup.find("div", {"class":"field-item even"})
+                paragraph2 = ["".join(x.findAll(text=True)) for x in content2.findAll("div")]
+                paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph2))
+                paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph1p))
+
     elif len(paragraph) >= 1:
-        if test_1p == '':
-            print "test_1p empty"
-            if test_1div != '':
-                print "test_1div empty"
-                paragraph_body = "\n\n%s" % ("\n\n".join(paragraph1div))
-            else:
-                paragraph_body = "\n\n%s" % ("\n\n".join(paragraph1p))
-        
-        elif len(test_1p) <400:
-            print "paragraph body 1p not correct, using paragraph1div"
-            paragraph_body = "\n\n%s" % ("\n\n".join(paragraph1div))
+        if len(content2) >=1:
+            paragraph2p_all = ["".join(x.findAll(text=True)) for x in soup.findAll("div", {"class":"field-items"})]
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph2p_all))
+            paragraph_body2 = " "
         else:
-            paragraph_body = "\n\n%s" % ("\n\n".join(paragraph1p))
+            if len(test_1p) <400:
+                print "paragraph body 1p not correct, using paragraph1div"
+                paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
+                paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph1p))
+
+            elif len(test_1p) >=400:
+                if test_1div != '':
+                    print "test_1div not empty"
+                    paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
+                    paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph1p))
+                else:
+                    paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1p))
+                    paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph1div))
+            
+            else:
+                paragraph2p_all = ["".join(x.findAll(text=True)) for x in soup.findAll("div", {"class":"field-items"})]
+                paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph2p_all))
+                paragraph_body2 = " "
+
 
     # Perform Quality Check on Parsed Speech
-    speech_parser_QC(url, paragraph_body, release)
-
+    speech_parser_two_para_QC(url, paragraph_body1, paragraph_body2, release)
 
     #Get File ID - Date & Time
     #Date
@@ -101,7 +115,8 @@ def WHT(url):
             f.write(url2.encode('utf-8'))
             f.write(release.encode('utf-8'))
             f.write(title.encode('utf-8'))
-            f.write(paragraph_body.encode('utf-8'))
+            f.write(paragraph_body1.encode('utf-8'))
+            f.write(paragraph_body2.encode('utf-8'))
             f.close
             return
 
@@ -112,7 +127,8 @@ def WHT(url):
                 f.write(url2.encode('utf-8'))
                 f.write(release.encode('utf-8'))
                 f.write(title.encode('utf-8'))
-                f.write(paragraph_body.encode('utf-8'))
+                f.write(paragraph_body1.encode('utf-8'))
+                f.write(paragraph_body2.encode('utf-8'))
                 f.close
                 return
             elif os.path.isfile(path2) == True:
@@ -122,7 +138,8 @@ def WHT(url):
                     f.write(url2.encode('utf-8'))
                     f.write(release.encode('utf-8'))
                     f.write(title.encode('utf-8'))
-                    f.write(paragraph_body.encode('utf-8'))
+                    f.write(paragraph_body1.encode('utf-8'))
+                    f.write(paragraph_body2.encode('utf-8'))
                     f.close
                     return
                 elif os.path.isfile(path3) == True:
@@ -132,7 +149,8 @@ def WHT(url):
                         f.write(url2.encode('utf-8'))
                         f.write(release.encode('utf-8'))
                         f.write(title.encode('utf-8'))
-                        f.write(paragraph_body.encode('utf-8'))
+                        f.write(paragraph_body1.encode('utf-8'))
+                        f.write(paragraph_body2.encode('utf-8'))
                         f.close
                         return
                     elif os.path.isfile(path4) == True:
@@ -142,7 +160,8 @@ def WHT(url):
                             f.write(url2.encode('utf-8'))
                             f.write(release.encode('utf-8'))
                             f.write(title.encode('utf-8'))
-                            f.write(paragraph_body.encode('utf-8'))
+                            f.write(paragraph_body1.encode('utf-8'))
+                            f.write(paragraph_body2.encode('utf-8'))
                             f.close
                             return
                         elif os.path.isfile(path5) == True:
@@ -151,7 +170,8 @@ def WHT(url):
                             f.write(url2.encode('utf-8'))
                             f.write(release.encode('utf-8'))
                             f.write(title.encode('utf-8'))
-                            f.write(paragraph_body.encode('utf-8'))
+                            f.write(paragraph_body1.encode('utf-8'))
+                            f.write(paragraph_body2.encode('utf-8'))
                             f.close
                             return 
 
@@ -165,15 +185,20 @@ def WHT(url):
 
 ##Test URLS
 #2014
-#url = "http://www.whitehouse.gov/the-press-office/2014/01/22/remarks-president-meeting-presidential-commission-election-administratio"
 
-#Broke the exception parser #the links do not exist, not a problem with parser. 
-#url = "http://www.whitehouse.gov/the-press-office/2014/01/31/remarks-president-long-term"
-#url = "http://www.whitehouse.gov/the-press-office/2015/06/06/remarks-president-eulogy-honor-beau-biden"
 
-#url = "http://www.whitehouse.gov/the-press-office/2012/08/21/remarks-president-campaign-event-reno-nv"
+#urls = ["http://www.whitehouse.gov/the-press-office/2014/01/22/remarks-president-meeting-presidential-commission-election-administratio", "http://www.whitehouse.gov/the-press-office/2014/01/31/remarks-president-long-term", "http://www.whitehouse.gov/the-press-office/2015/06/06/remarks-president-eulogy-honor-beau-biden", "http://www.whitehouse.gov/the-press-office/2012/08/21/remarks-president-campaign-event-reno-nv"]
+
+#2013 urls
+#urls = ["http://www.whitehouse.gov/the-press-office/2013/01/25/weekly-address-two-nominees-who-will-fight-american-people", "http://www.whitehouse.gov/the-press-office/2013/01/12/weekly-address-ending-war-afghanistan-and-rebuilding-america", "http://www.whitehouse.gov/the-press-office/2013/02/23/weekly-address-congress-must-act-now-stop-sequester", "http://www.whitehouse.gov/the-press-office/2013/02/02/weekly-address-balanced-approach-growing-economy-2013", "http://www.whitehouse.gov/the-press-office/2013/04/06/weekly-address-president-s-plan-create-jobs-and-cut-deficit", "http://www.whitehouse.gov/the-press-office/2013/06/15/weekly-address-celebrating-fathers-day-weekend"]
+
+#url = "http://www.whitehouse.gov/the-press-office/2013/01/25/weekly-address-two-nominees-who-will-fight-american-people"
 
 #WHT(url)
+
+#for url in urls:
+#    WHT(url)
+
 
 
 
