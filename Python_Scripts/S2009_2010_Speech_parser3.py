@@ -86,7 +86,6 @@ def pre_WHT3(url):
     paragraph_body2lp = "\n\n%s" % ("\n\n".join(paragraph2))
 
     
-    #ADD P2-P
     # Get Paragraph2p
     paragraph2p = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
 
@@ -101,45 +100,30 @@ def pre_WHT3(url):
     test_1div = paragraph_body1div.replace(' ', '').replace('\n', '')
 
     try:
-"""
-        if test_id == '':
-            print "paragraph body 2 empty"
-            content1 = soup.find("div", {"class":"field-items"})
-            paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
-            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
+        if len(test_2) < 400:
+            #print "paragraph body 2 short"
+            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
 
-        elif len(test_id) < 400:
-            print "paragraph body 2 not correct"
-            content1 = soup.find("div", {"class":"field-items"})
-            paragraph1 = ["".join(x.findAll(text=True)) for x in content1.findAll("p")]
-            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1))
-
-"""
-
-
-        if test_2 !='':
+        elif len(test_2) > 400:
             paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2))
-            paragraph_body1 = ' '
+            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
 
 
         elif test_2 == '':
             
             print "paragraph body 2 empty"
-            paragraph2p = ["".join(x.findAll(text=True)) for x in content.findAll("p")]
-            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
 
-            if test_1p == '':
+            if len(test_1p) < 400:
                 if test_1div != '':
                     paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
                     paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
-            elif test_1p != '':
+                else:
+                    paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
+                    paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))     
+            elif len(test_1p) > 400:
                 paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1p))
                 paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
-
-        elif len(test_2) < 400:
-            print "paragraph body 2 not correct"
-            paragraph_body2 = "\n\n%s" % ("\n\n".join(paragraph2p))
-            paragraph_body1 = "\n\n%s" % ("\n\n".join(paragraph1div))
 
         else:
             print "else"
@@ -263,7 +247,15 @@ def pre_WHT3(url):
 
 #url = "https://www.whitehouse.gov/the-press-office/2010/09/28/remarks-president-dnc-rally-madison-wisconsin"
 
-#pre_WHT3(url)
+#url = "http://www.whitehouse.gov/the-press-office/remarks-president-human-rights-campaign-dinner"
+#url = "http://www.whitehouse.gov/the-press-office/remarks-president-obama-and-prime-minister-vejjajiva-thailand-after-asean-10-meetin"
+#url = "http://www.whitehouse.gov/the-press-office/remarks-president-barack-obama-suntory-hall"
+
+#urls = ["http://www.whitehouse.gov/the-press-office/remarks-president-qa-session-closing-fiscal-responsibility-summit-2-23-09", "http://www.whitehouse.gov/the-press-office/remarks-president-qa-session-closing-fiscal-responsibility-summit-2-23-09", "http://www.whitehouse.gov/the-press-office/press-availability-president-obama-and-prime-minister-rudd-australia", "http://www.whitehouse.gov/the-press-office/remarks-president-barack-obama-executive-compensation-with-secretary-geithner", "http://www.whitehouse.gov/the-press-office/remarks-president-welcoming-senior-staff-and-cabinet-secretaries-white-house", "http://www.whitehouse.gov/the-press-office/remarks-president-obama-and-prime-minister-aso-meeting", "http://www.whitehouse.gov/the-press-office/remarks-president-question-and-answer-session-closing-fiscal-responsibility-summit", "http://www.whitehouse.gov/the-press-office/remarks-president-signing-credit-card-accountability-responsibility-and-disclosure-", "http://www.whitehouse.gov/the-press-office/remarks-president-senate-passage-health-insurance-reform", "http://www.whitehouse.gov/the-press-office/remarks-president-and-vice-president-meeting-with-nations-mayors", "http://www.whitehouse.gov/the-press-office/remarks-president-costa-mesa-town-hall", "https://www.whitehouse.gov/the-press-office/2010/09/28/remarks-president-dnc-rally-madison-wisconsin", "http://www.whitehouse.gov/the-press-office/remarks-president-human-rights-campaign-dinner", "http://www.whitehouse.gov/the-press-office/remarks-president-obama-and-prime-minister-vejjajiva-thailand-after-asean-10-meetin", "http://www.whitehouse.gov/the-press-office/remarks-president-barack-obama-suntory-hall"]
+
+
+#for url in urls:
+#    pre_WHT3(url)
 
 
 
