@@ -25,7 +25,4 @@ def remove_duplicatesSpeechURL(merged_speech_urls_csv, no_duplicates_speech_csv)
 #remove_duplicatesSpeechURL("speechurls_test.csv", "cleaned_urls2.csv")
 #remove_duplicatesSpeechURL("speechurls_new.csv", "cleaned_urls2_new.csv")
 
-remove_duplicatesSpeechURL("__merged_speechurls.csv", "speechurls.csv")
-
-
-
+remove_duplicatesSpeechURL("speech_urls_current_data.csv", "speechurls.csv")

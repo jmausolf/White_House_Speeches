@@ -22,6 +22,9 @@ import unittest, time, re
 sys.path.append('../Python_Scripts/')
 from speech_urls import *
 
+print "Running White House Speech Collection"
+print "Your Browser Will Open and Close During This Process."
+print "Please do not close..."
 
 class Speeches_and_Remarks(unittest.TestCase):
     def setUp(self):
@@ -35,7 +38,7 @@ class Speeches_and_Remarks(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 100):
+        for i in range(1, 7):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
@@ -67,7 +70,7 @@ class Weekly_Addresses(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 100):
+        for i in range(1, 5):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
@@ -99,7 +102,7 @@ class Press_Briefings(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 100):
+        for i in range(1, 5):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
@@ -130,7 +133,7 @@ class Statements_and_Releases(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 100):
+        for i in range(1, 5):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
@@ -152,4 +155,3 @@ class Statements_and_Releases(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
