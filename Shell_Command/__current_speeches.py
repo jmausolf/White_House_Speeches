@@ -38,7 +38,7 @@ class Speeches_and_Remarks(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 75):
+        for i in range(1, 400):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
@@ -70,7 +70,7 @@ class Weekly_Addresses(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 50):
+        for i in range(1, 150):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
@@ -102,7 +102,7 @@ class Press_Briefings(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 50):
+        for i in range(1, 400):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
@@ -133,7 +133,7 @@ class Statements_and_Releases(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 50):
+        for i in range(1, 400):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
