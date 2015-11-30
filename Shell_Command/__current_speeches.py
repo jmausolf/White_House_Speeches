@@ -133,7 +133,7 @@ class Statements_and_Releases(unittest.TestCase):
         driver = self.driver
         delay = 3
         driver.get(self.base_url)
-        for i in range(1, 400):
+        for i in range(1, 700):
             scroll +=1
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             print "conducting infinite scroll scrape...scroll number "+str(scroll)
