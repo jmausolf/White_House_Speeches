@@ -13,7 +13,7 @@ https://www.whitehouse.gov/briefing-room/speeches-and-remarks
 This generates, logs, and sorts the unique URLs for every speech and remark by different parties, chiefly, the President, Vice President, First Lady, Second Lady, as well as other members of the executive staff. After collecting URLS, the package runs a parser on these URLs, extracting the content to individual text files, labeled by date, and sorted into folders by speaker (President, Vice President, First Lady, Second Lady, Other). URLs that result in parsing errors will be saved to a separate .CSV file for review. Once collected, the text can be analyzed using a method of your preference, such as a Python-based script to extract keywords and phrases [tutorial here](http://jmausolf.github.io/code/Analyzing_Text_in_Python/).
 
 
-# Dependencies
+## Dependencies
 
 To run this package, you will need several dependencies. 
 
@@ -23,7 +23,7 @@ To run this package, you will need several dependencies.
 3. This package runs a Python library [Selenium](http://selenium-python.readthedocs.io) which must be installed.
 4. The Selenium script will utilize the Firefox browser.
 
-# To Run
+## To Run
 
 1. Git clone this repository:
 	```git clone https://github.com/jmausolf/White_House_Speeches```
